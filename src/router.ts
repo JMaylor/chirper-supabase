@@ -59,6 +59,7 @@ const router = createRouter({
       component: () => import("@/layouts/DashboardLayout.vue"),
       meta: {
         requiresAuth: true,
+        requiresProfile: true,
       },
       children: [
         {
@@ -66,30 +67,36 @@ const router = createRouter({
           name: "home",
           component: () => import("@/views/HomeView.vue"),
         },
+      ],
+    },
+
+    {
+      path: "/",
+      component: () => import("@/layouts/DashboardLayout.vue"),
+      meta: {
+        requiresAuth: true,
+      },
+      children: [
         {
           path: "/profile",
           name: "profile",
           component: () => import("@/views/ProfileView.vue"),
-        },
-        {
-          path: "/news",
-          name: "news",
-          component: () => import("@/views/NewsView.vue"),
         },
       ],
     },
   ],
 });
 
-const { supabase } = useAuthStore(pinia);
-supabase.auth.onAuthStateChange((event) => {
-  console.log(event);
-  if (event == "SIGNED_OUT") return router.push("/signin");
+const { supabase, fetchProfile } = useAuthStore(pinia);
+supabase.auth.onAuthStateChange(async (event, data) => {
+  console.log(event, data);
+  if (event == "SIGNED_OUT") return router.push("/auth");
   if (event == "SIGNED_IN") {
     const routeName = router.currentRoute.value.name;
     console.log("routeName", routeName);
 
     if (routeName == "callback") {
+      await fetchProfile();
       setTimeout(() => {
         return router.push({ name: "home" });
       }, 0);
@@ -98,16 +105,21 @@ supabase.auth.onAuthStateChange((event) => {
 });
 
 router.beforeEach((to) => {
-  const { supabase } = useAuthStore();
+  const { supabase, hasValidProfile } = useAuthStore();
 
   if (to.meta.requiresAuth && !supabase.auth.user()) {
     return {
-      path: "/signin",
+      path: "/auth",
     };
   }
   if (to.meta.requiresNoAuth && supabase.auth.user()) {
     return {
       path: "/",
+    };
+  }
+  if (to.meta.requiresProfile && !hasValidProfile) {
+    return {
+      path: "/profile",
     };
   }
 });

@@ -9,7 +9,7 @@ const reRoute = computed(() => {
       text: "Go Home",
     };
   return {
-    to: "/signin",
+    to: "/auth",
     text: "Sign In",
   };
 });

@@ -20,9 +20,8 @@ const { authFunctions, loading } = useAuthProviders(
 );
 </script>
 <template>
-  <h2 class="mb- text-2xl font-bold">title</h2>
-  <p class="mb-4 text-sm text-slate-500">subtitle</p>
-  {{ loading }}
+  <h2 class="mb- text-2xl font-bold">Hey there</h2>
+  <p class="mb-4 text-sm text-slate-500">Let's get chirping</p>
 
   <div class="flex space-x-4">
     <VButton
@@ -30,7 +29,7 @@ const { authFunctions, loading } = useAuthProviders(
       :loading="loading"
       :disabled="loading"
       type="button"
-      class="flex h-10 w-10 items-center justify-center"
+      class="flex h-10 w-10 items-center justify-center rounded-full"
       :class="color"
       @click="authFunctions[name]"
     >
