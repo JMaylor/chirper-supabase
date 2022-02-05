@@ -2,14 +2,11 @@
 import { useAuthStore } from "@/stores/auth";
 
 const router = useRouter();
-const { supabase, fetchProfile } = useAuthStore();
+const { supabase } = useAuthStore();
 
-onMounted(async () => {
+onMounted(() => {
   if (supabase.auth.user()) {
-    console.log(
-      "arrived on callback page with an existing user. should fetch their profile"
-    );
-    await fetchProfile();
+    console.log("arrived on callback page with an existing user");
     setTimeout(() => {
       router.push("/");
     }, 0);

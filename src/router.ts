@@ -90,37 +90,47 @@ const router = createRouter({
 const { supabase, fetchProfile } = useAuthStore(pinia);
 supabase.auth.onAuthStateChange(async (event, data) => {
   console.log(event, data);
-  if (event == "SIGNED_OUT") return router.push("/auth");
-  if (event == "SIGNED_IN") {
+  if (event === "USER_UPDATED") await useAuthStore().fetchProfile();
+  if (event === "SIGNED_OUT") router.push("/auth");
+  if (event === "SIGNED_IN") {
     const routeName = router.currentRoute.value.name;
-    console.log("routeName", routeName);
-
     if (routeName == "callback") {
       await fetchProfile();
       setTimeout(() => {
-        return router.push({ name: "home" });
+        router.push({ name: "home" });
       }, 0);
     }
   }
 });
 
-router.beforeEach((to) => {
-  const { supabase, hasValidProfile } = useAuthStore();
+router.beforeEach(async (to) => {
+  const authStore = useAuthStore();
 
-  if (to.meta.requiresAuth && !supabase.auth.user()) {
+  if (to.meta.requiresAuth && !authStore.supabase.auth.user()) {
     return {
       path: "/auth",
     };
   }
-  if (to.meta.requiresNoAuth && supabase.auth.user()) {
+  if (to.meta.requiresNoAuth && authStore.supabase.auth.user()) {
     return {
       path: "/",
     };
   }
-  if (to.meta.requiresProfile && !hasValidProfile) {
-    return {
-      path: "/profile",
-    };
+  if (to.meta.requiresProfile) {
+    console.log("route requires profile, fetching it...");
+    if (!authStore.profile) await authStore.fetchProfile();
+    console.log(authStore.profile);
+
+    console.log(
+      "profile fetched",
+      authStore.hasValidProfile,
+      authStore.profile
+    );
+
+    if (!authStore.hasValidProfile)
+      return {
+        path: "/profile",
+      };
   }
 });
 

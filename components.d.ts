@@ -6,13 +6,12 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./src/components/AppFooter.vue')['default']
     AppTopBar: typeof import('./src/components/AppTopBar.vue')['default']
-    AuthForm: typeof import('./src/components/AuthForm.vue')['default']
     BrandLogo: typeof import('./src/components/images/BrandLogo.vue')['default']
     ICarbonLogout: typeof import('~icons/carbon/logout')['default']
     ICarbonMenu: typeof import('~icons/carbon/menu')['default']
     ICarbonMoon: typeof import('~icons/carbon/moon')['default']
     ICarbonSun: typeof import('~icons/carbon/sun')['default']
-    IMdiGithub: typeof import('~icons/mdi/github')['default']
+    INotoBird: typeof import('~icons/noto/bird')['default']
     'INotoV1:bird': typeof import('~icons/noto-v1/bird')['default']
     ISimpleIconsSupabase: typeof import('~icons/simple-icons/supabase')['default']
     ISimpleIconsVuedotjs: typeof import('~icons/simple-icons/vuedotjs')['default']
@@ -22,7 +21,6 @@ declare module 'vue' {
     VIconButton: typeof import('./src/components/VIconButton.vue')['default']
     VInput: typeof import('./src/components/VInput.vue')['default']
     VLabel: typeof import('./src/components/VLabel.vue')['default']
-    VPasswordInput: typeof import('./src/components/VPasswordInput.vue')['default']
   }
 }
 

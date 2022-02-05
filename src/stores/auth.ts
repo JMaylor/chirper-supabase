@@ -9,28 +9,27 @@ interface Profile {
   picture: MaybeString;
 }
 
-const profile = {} as Profile;
+const profile = null as Profile | null;
 
 export const useAuthStore = defineStore("auth", {
   state: () => {
     return { supabase, profile };
   },
   getters: {
-    hasValidProfile: ({ profile }) => !!profile.handle && !profile.user_name,
+    hasValidProfile: ({ profile }) => !!profile?.handle && !!profile?.user_name,
   },
   actions: {
     async fetchProfile() {
-      const { data: profiles, error } = await supabase
-        .from("profiles")
-        .select("*");
+      const user = this.supabase.auth.user();
+      if (user) {
+        const { data: profiles, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id);
 
-      if (error) return alert(error);
-      this.profile = profiles?.[0];
+        if (error) return alert(error);
+        this.profile = profiles?.[0];
+      }
     },
   },
-});
-
-supabase.auth.onAuthStateChange(async (event) => {
-  if (event == "SIGNED_IN" || event == "USER_UPDATED")
-    await useAuthStore().fetchProfile();
 });
