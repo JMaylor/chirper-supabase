@@ -79,11 +79,6 @@ const navLinks = [
     to: "/profile",
     icon: "heroicons-outline:user",
   },
-  {
-    text: "News",
-    to: "/news",
-    icon: "heroicons-outline:newspaper",
-  },
 ];
 
 async function signOut() {
