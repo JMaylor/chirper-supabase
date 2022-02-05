@@ -20,8 +20,7 @@
       <nav class="py-2">
         <span class="nav-button">
           Chirper
-          <i-simple-icons-vuedotjs class="ml-2 h-4 w-4" />
-          <i-simple-icons-supabase class="ml-2 h-4 w-4" />
+          <BrandLogo class="ml-2 h-8 w-8" />
         </span>
       </nav>
 
