@@ -1,4 +1,4 @@
-import { ref, Ref } from "vue";
+import { Ref } from "vue";
 import { Provider } from "@supabase/supabase-js";
 import { useAuthStore } from "@/stores/auth";
 
@@ -6,14 +6,14 @@ type AuthFunctions = {
   [key in Provider]?: () => void;
 };
 
-export function useAuthProviders(providers: Provider[]): {
+export function useAuthProviders(providers: { provider: Provider }[]): {
   authFunctions: AuthFunctions;
   loading: Ref<boolean>;
 } {
   const router = useRouter();
   const loading = ref(false);
   const authFunctions: AuthFunctions = {};
-  for (const provider of providers) {
+  for (const { provider } of providers) {
     authFunctions[provider] = async () => {
       loading.value = true;
       const { supabase } = useAuthStore();
