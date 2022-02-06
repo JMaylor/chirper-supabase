@@ -6,8 +6,10 @@ const chirps = ref([] as ChirpWithAuthor[]);
 async function fetchChirps() {
   const { supabase } = useAuthStore();
 
-  const { data, error } = await supabase.from("chirps").select(
-    `
+  const { data, error } = await supabase
+    .from("chirps")
+    .select(
+      `
       body,
       created_at,
       author (
@@ -16,7 +18,8 @@ async function fetchChirps() {
         picture
       )
     `
-  );
+    )
+    .order("created_at", { ascending: false });
   if (error) alert(error);
   if (data) chirps.value = data;
 }
