@@ -4,19 +4,17 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppDrawer: typeof import('./src/components/AppDrawer.vue')['default']
     AppFooter: typeof import('./src/components/AppFooter.vue')['default']
+    AppHeader: typeof import('./src/components/AppHeader.vue')['default']
     AppTopBar: typeof import('./src/components/AppTopBar.vue')['default']
     BrandLogo: typeof import('./src/components/images/BrandLogo.vue')['default']
-    ICarbonLogout: typeof import('~icons/carbon/logout')['default']
-    ICarbonMenu: typeof import('~icons/carbon/menu')['default']
+    FeedChirp: typeof import('./src/components/FeedChirp.vue')['default']
     ICarbonMoon: typeof import('~icons/carbon/moon')['default']
     ICarbonSun: typeof import('~icons/carbon/sun')['default']
-    INotoBird: typeof import('~icons/noto/bird')['default']
-    'INotoV1:bird': typeof import('~icons/noto-v1/bird')['default']
-    ISimpleIconsSupabase: typeof import('~icons/simple-icons/supabase')['default']
-    ISimpleIconsVuedotjs: typeof import('~icons/simple-icons/vuedotjs')['default']
     LoadingIcon: typeof import('./src/components/LoadingIcon.vue')['default']
     NavDrawer: typeof import('./src/components/NavDrawer.vue')['default']
+    PostChirpWidget: typeof import('./src/components/PostChirpWidget.vue')['default']
     VButton: typeof import('./src/components/VButton.vue')['default']
     VIconButton: typeof import('./src/components/VIconButton.vue')['default']
     VInput: typeof import('./src/components/VInput.vue')['default']

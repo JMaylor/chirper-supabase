@@ -56,7 +56,7 @@ const router = createRouter({
 
     {
       path: "/",
-      component: () => import("@/layouts/DashboardLayout.vue"),
+      component: () => import("@/layouts/AppLayout.vue"),
       meta: {
         requiresAuth: true,
         requiresProfile: true,
@@ -72,7 +72,7 @@ const router = createRouter({
 
     {
       path: "/",
-      component: () => import("@/layouts/DashboardLayout.vue"),
+      component: () => import("@/layouts/AppLayout.vue"),
       meta: {
         requiresAuth: true,
       },

@@ -1,14 +1,25 @@
 <script lang="ts" setup></script>
 
 <template>
-  <router-view class="bg-slate-300 dark:bg-slate-600" />
+  <router-view />
 </template>
 
 <style>
 html,
 body,
 #app {
-  height: 100%;
-  min-height: 100%;
+  @apply h-full bg-slate-50 dark:bg-slate-900 text-black dark:text-white;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-500;
+}
+
+::-webkit-scrollbar {
+  @apply w-1 bg-slate-500;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-primary;
 }
 </style>

@@ -19,7 +19,9 @@ const { authFunctions, loading } = useAuthProviders(providers);
 </script>
 <template>
   <h2 class="mb- text-2xl font-bold">Hey there</h2>
-  <p class="mb-4 text-sm text-slate-500">Let's get chirping</p>
+  <p class="mb-4 text-sm font-medium text-slate-500 dark:text-accent">
+    Let's get chirping
+  </p>
 
   <div class="flex space-x-4">
     <VButton

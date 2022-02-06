@@ -1,8 +1,31 @@
 <script setup lang="ts">
-import { supabase } from "@/services/supabase";
+import { useAuthStore } from "@/stores/auth";
+import { ChirpWithAuthor } from "@/types";
+
+const chirps = ref([] as ChirpWithAuthor[]);
+async function fetchChirps() {
+  const { supabase } = useAuthStore();
+
+  const { data, error } = await supabase.from("chirps").select(
+    `
+      body,
+      created_at,
+      author (
+        handle,
+        user_name,
+        picture
+      )
+    `
+  );
+  if (error) alert(error);
+  if (data) chirps.value = data;
+}
+
+fetchChirps();
 </script>
 
 <template>
-  <h1 class="text-3xl font-medium">Home</h1>
-  <pre>{{ supabase.auth.user() }}</pre>
+  <div class="flex flex-col gap-3 border-b py-3">
+    <FeedChirp v-for="chirp in chirps" :chirp="chirp"></FeedChirp>
+  </div>
 </template>
