@@ -10,12 +10,11 @@ watch(chirp, () => {
   autosize(chirpInput.value);
 });
 async function postChirp() {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("chirps")
     .insert([{ body: chirp.value }]);
 
   if (error) alert(error);
-  if (data) alert(data);
 }
 </script>
 <template>
@@ -28,7 +27,7 @@ async function postChirp() {
     <form class="flex-grow" @submit.prevent="postChirp">
       <textarea
         ref="chirpInput"
-        class="w-full bg-transparent px-3 py-2 text-lg resize-none"
+        class="w-full resize-none bg-transparent px-3 py-2 text-lg"
         v-model="chirp"
         placeholder="What's happening?"
         required
