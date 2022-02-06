@@ -28,7 +28,7 @@ async function postChirp() {
     <form class="flex-grow" @submit.prevent="postChirp">
       <textarea
         ref="chirpInput"
-        class="w-full bg-transparent px-3 py-2 text-lg"
+        class="w-full bg-transparent px-3 py-2 text-lg resize-none"
         v-model="chirp"
         placeholder="What's happening?"
         required
