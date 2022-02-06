@@ -1,6 +1,4 @@
-<script lang="ts" setup>
-import PostChirpWidget from "@/components/PostChirpWidget.vue";
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div
@@ -11,7 +9,6 @@ import PostChirpWidget from "@/components/PostChirpWidget.vue";
     >
       <div class="sticky top-0 border-b"><AppHeader /></div>
       <div class="overflow-x-auto">
-        <PostChirpWidget class="border-b" />
         <router-view />
       </div>
     </div>

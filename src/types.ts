@@ -1,8 +1,10 @@
+type MaybeString = string | null;
+
 export type UserProfile = {
-  bio?: string;
-  user_name: string;
-  picture: string;
+  bio: MaybeString;
   handle: string;
+  user_name: string;
+  picture: MaybeString;
 };
 
 export type Chirp = {

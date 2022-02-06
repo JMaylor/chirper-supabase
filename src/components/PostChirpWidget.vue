@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import autosize from "autosize";
+import { Chirp } from "@/types";
 import { useAuthStore } from "@/stores/auth";
 import { supabase } from "@/services/supabase";
 const authStore = useAuthStore();
@@ -9,11 +10,15 @@ const chirpInput = ref();
 watch(chirp, () => {
   autosize(chirpInput.value);
 });
+
+const emit = defineEmits<{
+  (e: "newChirp", chirp: Chirp): void;
+}>();
 async function postChirp() {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("chirps")
     .insert([{ body: chirp.value }]);
-
+  if (data) emit("newChirp", data[0]);
   if (error) alert(error);
 }
 </script>

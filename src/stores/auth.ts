@@ -1,15 +1,7 @@
 import { supabase } from "@/services/supabase";
+import { UserProfile } from "@/types";
 
-type MaybeString = string | null;
-
-interface Profile {
-  bio: MaybeString;
-  handle: MaybeString;
-  user_name: MaybeString;
-  picture: MaybeString;
-}
-
-const profile = null as Profile | null;
+const profile = null as UserProfile | null;
 
 export const useAuthStore = defineStore("auth", {
   state: () => {
