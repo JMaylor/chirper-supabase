@@ -6,7 +6,7 @@ const props = defineProps<{
   chirp: ChirpWithAuthor;
 }>();
 
-const likes = ref(null as string[] | null);
+const likes = ref([] as string[]);
 
 const isLikedByCurrentUser = computed(() => {
   const { supabase } = useAuthStore();
@@ -15,22 +15,18 @@ const isLikedByCurrentUser = computed(() => {
 
 async function likeChirp() {
   const { supabase } = useAuthStore();
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("likes")
     .insert([{ chirp: props.chirp.id }]);
-
-  if (data) alert("liked");
   if (error) alert(error.message);
 }
 
 async function unLikeChirp() {
   const { supabase } = useAuthStore();
-  const { data, error } = await supabase.from("likes").delete().match({
+  const { error } = await supabase.from("likes").delete().match({
     chirp: props.chirp.id,
     liker: supabase.auth.user()?.id,
   });
-
-  if (data) alert("unliked");
   if (error) alert(error.message);
 }
 
@@ -46,6 +42,15 @@ async function fetchLikes() {
 }
 
 fetchLikes();
+const { supabase } = useAuthStore();
+supabase
+  .from(`likes:chirp=eq.${props.chirp.id}`)
+  .on("*", (payload: any) => {
+    if (payload.eventType == "INSERT") likes.value.push(payload.new.liker);
+    if (payload.eventType == "DELETE")
+      likes.value.splice(likes.value.indexOf(payload.old.liker), 1);
+  })
+  .subscribe();
 </script>
 <template>
   <div class="grid w-full grid-cols-4">
@@ -55,7 +60,7 @@ fetchLikes();
     >
       <i-heroicons-solid:heart v-if="isLikedByCurrentUser" />
       <i-heroicons-outline:heart v-else />
-      <span>{{ likes?.length }}</span>
+      <span>{{ likes.length }}</span>
     </button>
   </div>
 </template>
