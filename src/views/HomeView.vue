@@ -10,6 +10,7 @@ async function fetchChirps() {
     .from("chirps")
     .select(
       `
+      id,
       body,
       created_at,
       author (

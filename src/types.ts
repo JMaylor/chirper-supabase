@@ -6,6 +6,7 @@ export type UserProfile = {
 };
 
 export type Chirp = {
+  id: number;
   body: string;
   created_at: string;
 };
