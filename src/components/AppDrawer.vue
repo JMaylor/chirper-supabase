@@ -33,7 +33,7 @@ async function signOut() {
       v-wave
       class="flex items-center justify-center gap-3 rounded-full p-3 md:pr-4 md:justify-start"
       :exact-active-class="
-        !disableActiveClass ? 'text-secondary font-bold bg-primary/30' : ''
+        !disableActiveClass ? 'text-secondary dark:text-primary bg-primary/30' : ''
       "
       :to="to"
     >

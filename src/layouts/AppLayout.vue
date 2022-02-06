@@ -24,7 +24,7 @@ import PostChirpWidget from "@/components/PostChirpWidget.vue";
   >
     <div class="max-w-screen-sm flex-grow overflow-y-scroll sm:overflow-y-auto border">
       <div class="sticky top-0 border-b"><AppHeader /></div>
-      <div class="overflow-x-hidden">
+      <div class="overflow-x-auto">
         <PostChirpWidget class="border-b"/>
         <router-view />
       </div>

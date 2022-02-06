@@ -25,7 +25,7 @@ fetchChirps();
 </script>
 
 <template>
-  <div class="flex flex-col gap-3 border-b py-3">
+  <div class="flex flex-col border-b divide-y">
     <FeedChirp v-for="chirp in chirps" :chirp="chirp"></FeedChirp>
   </div>
 </template>
