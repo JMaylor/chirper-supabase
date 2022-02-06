@@ -1,3 +1,3 @@
 <template>
-  <i-noto-v1:bird />
+  <i-noto:bird />
 </template>
