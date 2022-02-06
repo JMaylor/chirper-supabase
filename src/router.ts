@@ -89,7 +89,6 @@ const router = createRouter({
 
 const { supabase, fetchProfile } = useAuthStore(pinia);
 supabase.auth.onAuthStateChange(async (event, data) => {
-  console.log(event, data);
   if (event === "USER_UPDATED") await useAuthStore().fetchProfile();
   if (event === "SIGNED_OUT") router.push("/auth");
   if (event === "SIGNED_IN") {
@@ -117,16 +116,7 @@ router.beforeEach(async (to) => {
     };
   }
   if (to.meta.requiresProfile) {
-    console.log("route requires profile, fetching it...");
     if (!authStore.profile) await authStore.fetchProfile();
-    console.log(authStore.profile);
-
-    console.log(
-      "profile fetched",
-      authStore.hasValidProfile,
-      authStore.profile
-    );
-
     if (!authStore.hasValidProfile)
       return {
         path: "/profile",

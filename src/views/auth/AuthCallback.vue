@@ -6,7 +6,6 @@ const { supabase } = useAuthStore();
 
 onMounted(() => {
   if (supabase.auth.user()) {
-    console.log("arrived on callback page with an existing user");
     setTimeout(() => {
       router.push("/");
     }, 0);
