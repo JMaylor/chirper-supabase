@@ -14,6 +14,7 @@ declare module 'vue' {
     ICarbonSun: typeof import('~icons/carbon/sun')['default']
     'IHeroiconsOutline:heart': typeof import('~icons/heroicons-outline/heart')['default']
     'IHeroiconsSolid:heart': typeof import('~icons/heroicons-solid/heart')['default']
+    'INoto:bird': typeof import('~icons/noto/bird')['default']
     LoadingIcon: typeof import('./src/components/LoadingIcon.vue')['default']
     PostChirpWidget: typeof import('./src/components/PostChirpWidget.vue')['default']
     VButton: typeof import('./src/components/VButton.vue')['default']
