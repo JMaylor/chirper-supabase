@@ -88,7 +88,7 @@ function onNewChirp(chirp: Chirp) {
     >
       <div
         v-if="pendingChirps.length > 0"
-        class="flex items-center justify-center overflow-hidden transition-all"
+        class="flex items-center justify-center overflow-hidden transition-all duration-500"
       >
         <button
           @click="loadPendingChirps"
@@ -100,10 +100,18 @@ function onNewChirp(chirp: Chirp) {
         </button>
       </div>
     </transition>
-    <FeedChirp
-      v-for="chirp in chirps"
-      :chirp="chirp"
-      :key="chirp.id"
-    ></FeedChirp>
+    <transition-group
+      name="list"
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
+      leave-active-class="absolute"
+    >
+      <FeedChirp
+        class="transition duration-500"
+        v-for="chirp in chirps"
+        :chirp="chirp"
+        :key="chirp.id"
+      ></FeedChirp>
+    </transition-group>
   </div>
 </template>
