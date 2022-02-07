@@ -8,7 +8,8 @@ export const useAuthStore = defineStore("auth", {
     return { supabase, profile };
   },
   getters: {
-    hasValidProfile: ({ profile }) => !!profile?.handle && !!profile?.user_name,
+    hasValidProfile: ({ profile }) =>
+      !!profile?.handle && !!profile?.user_name && !!profile?.picture,
   },
   actions: {
     async fetchProfile() {
