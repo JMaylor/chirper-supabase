@@ -115,8 +115,8 @@ router.beforeEach(async (to) => {
       path: "/",
     };
   }
+  if (!authStore.profile) await authStore.fetchProfile();
   if (to.meta.requiresProfile) {
-    if (!authStore.profile) await authStore.fetchProfile();
     if (!authStore.hasValidProfile)
       return {
         path: "/profile",
