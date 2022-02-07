@@ -19,7 +19,7 @@ const timeAgo = useTimeAgo(new Date(props.chirp.created_at));
         <span class="font-bold">{{ chirp.author.user_name }}</span> ~
         <span>@{{ chirp.author.handle }}</span> ~ <span>{{ timeAgo }}</span>
       </div>
-      <div class="mb-3 break-words">{{ chirp.body }}</div>
+      <div class="mb-3 break-words whitespace-pre-line">{{ chirp.body }}</div>
       <ChirpActions :chirp="chirp" />
     </div>
   </div>
